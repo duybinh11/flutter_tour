@@ -1,6 +1,9 @@
 import 'package:book_tour/config/routes/appRoutes.dart';
 import 'package:book_tour/presentation/AdminAddTourScreen/binding/BindingAdminAddTour.dart';
 import 'package:book_tour/presentation/AdminAddTourScreen/view/AdminAddTourScreen.dart';
+import 'package:book_tour/presentation/AdminDetailBookedScreen/view/AdminDetailBookedScreen.dart';
+import 'package:book_tour/presentation/AdminDetailTourScreen/binding/BindingAdminDetailTour.dart';
+import 'package:book_tour/presentation/AdminDetailTourScreen/view/AdminDetailTourScreen.dart';
 import 'package:book_tour/presentation/AdminHomeScreen/binding/BindingAdminHome.dart';
 import 'package:book_tour/presentation/AdminHomeScreen/view/AdminHomeScreen.dart';
 import 'package:book_tour/presentation/DetailProfileScreen/binding/BindingDetailProfile.dart';
@@ -8,6 +11,8 @@ import 'package:book_tour/presentation/DetailProfileScreen/view/DetailProfileScr
 import 'package:book_tour/presentation/IntroduceScreen/view/IntroduceScreen.dart';
 import 'package:book_tour/presentation/SignUpScreen/binding/BindingSignUp.dart';
 import 'package:book_tour/presentation/SignUpScreen/view/SignUpScreen.dart';
+import 'package:book_tour/presentation/UserDetailBookedScreen/binding/BindingUserDetailBooked.dart';
+import 'package:book_tour/presentation/UserDetailBookedScreen/view/UserDetailBookedScreen.dart';
 import 'package:book_tour/presentation/UserDetailTourScreen/binding/BindingUserDetailTour.dart';
 import 'package:book_tour/presentation/UserDetailTourScreen/view/UserDetailTour.dart';
 import 'package:book_tour/presentation/UserIndexScreen/binding/BindingUserIndex.dart';
@@ -50,14 +55,17 @@ class AppPages {
         name: AppRoutes.adminAddTour,
         page: () => const Adminaddtourscreen(),
         binding: Bindingadminaddtour()),
-    // GetPage(
-    //     name: AppRoutes.hotelIndex,
-    //     page: () => const Hotelindexscreen(),
-    //     binding: Hotelindexbinding()),
-    // GetPage(
-    //   name: AppRoutes.hotelDetailBooked,
-    //   page: () => const HotelDetailBooked(),
-    //   // binding: Detailbookedbinding()
-    // ),
+    GetPage(
+        name: AppRoutes.adminDetailTour,
+        page: () => const Admindetailtourscreen(),
+        binding: Bindingadmindetailtour()),
+    GetPage(
+        name: AppRoutes.userDetailBooked,
+        page: () => const Userdetailbookedscreen(),
+        binding: Bindinguserdetailbooked()),
+    GetPage(
+        name: AppRoutes.adminDetailBooked,
+        page: () => const Admindetailbookedscreen(),
+        binding: Bindinguserdetailbooked()),
   ];
 }

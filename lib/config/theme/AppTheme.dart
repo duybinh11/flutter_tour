@@ -14,7 +14,7 @@ class AppTheme {
             foregroundColor: Colors.white,
             backgroundColor: Colors.black)),
     appBarTheme: AppBarTheme(
-        backgroundColor: UtilColors.primaryKeyColor,
+        backgroundColor: Colors.blue,
         centerTitle: true,
         titleTextStyle: TextStyle(
             fontSize: 18.sp, fontWeight: FontWeight.w500, color: Colors.white)),

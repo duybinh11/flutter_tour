@@ -18,7 +18,7 @@ class CustomDropdown<T> extends StatelessWidget {
       required this.label,
       required this.onChanged,
       required this.itemLabelBuilder,
-      this.colorText = UtilColors.primaryKeyColor,
+      this.colorText = Colors.black,
       this.iconPrefix});
 
   @override

@@ -1,10 +1,12 @@
 import 'package:book_tour/config/routes/appRoutes.dart';
+import 'package:book_tour/presentation/login/controller/ControllerLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/get_state_manager/src/simple/get_view.dart';
 
-class Loginscreen extends StatelessWidget {
+class Loginscreen extends GetView<Controllerlogin> {
   const Loginscreen({super.key});
 
   @override
@@ -58,9 +60,10 @@ class Loginscreen extends StatelessWidget {
                         SizedBox(
                           height: 8.h,
                         ),
-                        const TextField(
-                          decoration:
-                              InputDecoration(hintText: "youremails@yahoo.com"),
+                        TextField(
+                          controller: controller.email,
+                          decoration: const InputDecoration(
+                              hintText: "youremails@yahoo.com"),
                         )
                       ],
                     ),
@@ -78,8 +81,10 @@ class Loginscreen extends StatelessWidget {
                         SizedBox(
                           height: 8.h,
                         ),
-                        const TextField(
-                          decoration: InputDecoration(hintText: "Password"),
+                        TextField(
+                          controller: controller.password,
+                          decoration:
+                              const InputDecoration(hintText: "Password"),
                         )
                       ],
                     ),
@@ -101,7 +106,7 @@ class Loginscreen extends StatelessWidget {
                         width: double.infinity,
                         height: 60.h,
                         child: ElevatedButton(
-                            onPressed: () => Get.toNamed(AppRoutes.userIndex),
+                            onPressed: () => controller.clickLogin(),
                             child: const Text("Sign In"))),
                     SizedBox(
                       height: 22.h,

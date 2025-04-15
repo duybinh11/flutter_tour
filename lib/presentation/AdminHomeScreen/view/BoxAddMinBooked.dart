@@ -1,19 +1,22 @@
 import 'package:book_tour/config/routes/appRoutes.dart';
 import 'package:book_tour/core/BaseWidget/CacheImgCustom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class Userbookingscreen extends StatelessWidget {
-  const Userbookingscreen({super.key});
+class BoxAddMinBooked extends StatelessWidget {
+  const BoxAddMinBooked({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.w),
+    return SizedBox(
+      width: double.infinity,
+      child: ListView.builder(
+        itemBuilder: (context, index) => Container(
+          margin: EdgeInsets.only(left: 20.w, top: 30.w, right: 20.w),
           padding: EdgeInsets.all(14.w),
           height: 170.h,
           width: double.infinity,
@@ -100,7 +103,7 @@ class Userbookingscreen extends StatelessWidget {
                           height: 30.h,
                           child: ElevatedButton(
                               onPressed: () =>
-                                  Get.toNamed(AppRoutes.userDetailBooked),
+                                  Get.toNamed(AppRoutes.adminDetailBooked),
                               child: Text(
                                 "View",
                                 style: TextStyle(

@@ -7,9 +7,9 @@ class AppRoutes {
   static const detailProfile = "/detailProfile";
   static const adminHome = "/adminHome";
   static const adminAddTour = "/adminAddTour";
-  // static const hotelIndex = "/hotelIndex";
-  // static const hotelDetailBooked = "/hotelDetailBooked";
-  // static const detailPost = "/detailPost";
+  static const adminDetailTour = "/adminDetailTour";
+  static const userDetailBooked = "/userDetailBooked";
+  static const adminDetailBooked = "/adminDetailBooked";
   // static const confirmSuggest = "/confirmSuggest";
   // static const banking = "/banking";
   // static const notification = "/notification";
