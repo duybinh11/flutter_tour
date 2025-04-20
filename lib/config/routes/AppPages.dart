@@ -1,6 +1,7 @@
 import 'package:book_tour/config/routes/appRoutes.dart';
 import 'package:book_tour/presentation/AdminAddTourScreen/binding/BindingAdminAddTour.dart';
 import 'package:book_tour/presentation/AdminAddTourScreen/view/AdminAddTourScreen.dart';
+import 'package:book_tour/presentation/AdminDetailBookedScreen/binding/BindingAdminDetailBooked.dart';
 import 'package:book_tour/presentation/AdminDetailBookedScreen/view/AdminDetailBookedScreen.dart';
 import 'package:book_tour/presentation/AdminDetailTourScreen/binding/BindingAdminDetailTour.dart';
 import 'package:book_tour/presentation/AdminDetailTourScreen/view/AdminDetailTourScreen.dart';
@@ -17,6 +18,8 @@ import 'package:book_tour/presentation/UserDetailTourScreen/binding/BindingUserD
 import 'package:book_tour/presentation/UserDetailTourScreen/view/UserDetailTour.dart';
 import 'package:book_tour/presentation/UserIndexScreen/binding/BindingUserIndex.dart';
 import 'package:book_tour/presentation/UserIndexScreen/view/UserIndexScreen.dart';
+import 'package:book_tour/presentation/UserSearchScreen/binding/BindingUserSearch.dart';
+import 'package:book_tour/presentation/UserSearchScreen/view/UserSearchScreen.dart';
 import 'package:book_tour/presentation/login/binding/BindingController.dart';
 import 'package:book_tour/presentation/login/view/LoginScreen.dart';
 import 'package:get/get_navigation/src/routes/get_route.dart';
@@ -66,6 +69,10 @@ class AppPages {
     GetPage(
         name: AppRoutes.adminDetailBooked,
         page: () => const Admindetailbookedscreen(),
-        binding: Bindinguserdetailbooked()),
+        binding: Bindingadmindetailbooked()),
+    GetPage(
+        name: AppRoutes.search,
+        page: () => const Usersearchscreen(),
+        binding: Bindingusersearch()),
   ];
 }

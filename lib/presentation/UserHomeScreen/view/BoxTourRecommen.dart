@@ -1,12 +1,12 @@
 import 'package:book_tour/core/BaseWidget/CacheImgCustom.dart';
+import 'package:book_tour/model/TourModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BoxTourRecommen extends StatelessWidget {
-  const BoxTourRecommen({
-    super.key,
-  });
+  final TourModel tourModel;
+  const BoxTourRecommen({super.key, required this.tourModel});
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +22,7 @@ class BoxTourRecommen extends StatelessWidget {
           SizedBox(
             height: double.infinity,
             width: 100.h,
-            child: CacheImgCustom(
-                url:
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdZPzvFTPTH-g_IeMTlo16ue1S3OdnmiCX7Q&s"),
+            child: CacheImgCustom(url: tourModel.imgs!.first),
           ),
           SizedBox(
             width: 10.w,
@@ -37,7 +35,7 @@ class BoxTourRecommen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Kerinci Mountain",
+                    tourModel.name!,
                     style:
                         TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
                   ),
@@ -48,7 +46,7 @@ class BoxTourRecommen extends StatelessWidget {
                         borderRadius: BorderRadius.all(Radius.circular(10.r)),
                         border: Border.all(width: 1, color: Colors.grey)),
                     child: Text(
-                      "Hiking",
+                      tourModel.type!,
                       style: TextStyle(
                           fontSize: 12.sp, fontWeight: FontWeight.w600),
                     ),
@@ -64,19 +62,19 @@ class BoxTourRecommen extends StatelessWidget {
                             SizedBox(
                               width: 5.w,
                             ),
-                            const Text("Solok, Jambi")
+                            Text(tourModel.address!.province!)
                           ],
                         ),
-                        const Row(
+                        Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.star,
                               color: Colors.yellow,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 5,
                             ),
-                            Text("4.3")
+                            Text("${tourModel.averageRate}")
                           ],
                         )
                       ],

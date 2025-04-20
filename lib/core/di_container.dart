@@ -1,6 +1,18 @@
-
 import 'package:book_tour/core/util/UtilConst.dart';
 import 'package:book_tour/data/domain/BaseUrl.dart';
+import 'package:book_tour/data/repository/RepositoryAdminAddTour.dart';
+import 'package:book_tour/data/repository/RepositoryAdminBookedDetail.dart';
+import 'package:book_tour/data/repository/RepositoryAdminDetailTour.dart';
+import 'package:book_tour/data/repository/RepositoryAdminHome.dart';
+import 'package:book_tour/data/repository/RepositoryAuth.dart';
+import 'package:book_tour/data/repository/RepositoryHome.dart';
+import 'package:book_tour/data/repository/RepositoryProfileDetail.dart';
+import 'package:book_tour/data/repository/RepositorySearch.dart';
+import 'package:book_tour/data/repository/RepositorySignUp.dart';
+import 'package:book_tour/data/repository/RepositoryUserBooked.dart';
+import 'package:book_tour/data/repository/RepositoryUserDetailBooked.dart';
+import 'package:book_tour/data/repository/RepositoryUserDetailTour.dart';
+import 'package:book_tour/data/repository/RepositoryUserProfile.dart';
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -29,53 +41,53 @@ Future<void> initDependencies() async {
 
   await sl.allReady();
 
-  // sl.registerLazySingleton(
-  //   () => Repositoryhotelsignup(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryauth(dio: sl(), sharedPreferences: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => Repositoryauth(dio: sl(), sharedPreferences: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositorysignup(dio: sl(), sharedPreferences: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => Repositorysignup(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryadminaddtour(dio: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => Repositoryindexuser(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryadminhome(dio: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => Repositorydetailhotel(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryadmindetailtour(dio: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => Repositoryuserdetailbooked(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryhome(dio: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => Repositoryhotelindex(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryuserprofile(dio: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => BannerRepository(dio: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryprofiledetail(dio: sl()),
+  );
 
-  // sl.registerLazySingleton(
-  //   () => PostRepository(dio: sl()),
-  // );
-  // sl.registerLazySingleton(
-  //   () => ServiceCategoryRepository(dio: sl()),
-  // );
-  // sl.registerLazySingleton(
-  //   () => WorkScheduleRepository(dio: sl()),
-  // );
-  // sl.registerLazySingleton(
-  //   () => ServiceRequestRepository(dio: sl()),
-  // );
-  // sl.registerLazySingleton(
-  //   () => AuthRepository(dio: sl(), sharedPreferences: sl()),
-  // );
+  sl.registerLazySingleton(
+    () => Repositoryuserdetailtour(dio: sl(), sharedPreferences: sl()),
+  );
+  sl.registerLazySingleton(
+    () => Repositoryuserbooked(dio: sl(), sharedPreferences: sl()),
+  );
+  sl.registerLazySingleton(
+    () => Repositoryuserdetailbooked(dio: sl(), sharedPreferences: sl()),
+  );
+  sl.registerLazySingleton(
+    () => Repositoryadminbookeddetail(dio: sl()),
+  );
+  sl.registerLazySingleton(
+    () => Repositorysearch(dio: sl()),
+  );
 
   // sl.registerLazySingleton(
   //   () => BankingRepository(dio: sl()),

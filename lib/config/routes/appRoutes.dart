@@ -10,7 +10,7 @@ class AppRoutes {
   static const adminDetailTour = "/adminDetailTour";
   static const userDetailBooked = "/userDetailBooked";
   static const adminDetailBooked = "/adminDetailBooked";
-  // static const confirmSuggest = "/confirmSuggest";
+  static const search = "/search";
   // static const banking = "/banking";
   // static const notification = "/notification";
   // static const updateProfile = "/updateProfile";

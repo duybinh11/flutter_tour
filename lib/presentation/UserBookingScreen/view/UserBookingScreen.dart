@@ -1,120 +1,37 @@
 import 'package:book_tour/config/routes/appRoutes.dart';
+import 'package:book_tour/core/BaseWidget/BoxBookTour.dart';
 import 'package:book_tour/core/BaseWidget/CacheImgCustom.dart';
+import 'package:book_tour/model/BookTourModel.dart';
+import 'package:book_tour/presentation/LoadingScreen.dart';
+import 'package:book_tour/presentation/UserBookingScreen/controller/ControllerUserBooking.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class Userbookingscreen extends StatelessWidget {
+class Userbookingscreen extends GetView<Controlleruserbooking> {
   const Userbookingscreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemBuilder: (context, index) => GestureDetector(
-        onTap: () {},
-        child: Container(
-          margin: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.w),
-          padding: EdgeInsets.all(14.w),
-          height: 170.h,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              border: Border.all(width: 1, color: Colors.grey),
-              borderRadius: BorderRadius.all(Radius.circular(20.r))),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      Image.asset("assets/icon/icon4.png"),
-                      SizedBox(
-                        width: 6.w,
-                      ),
-                      Text(
-                        "20 Oct 2023",
-                        style: TextStyle(
-                            fontSize: 12.sp, fontWeight: FontWeight.w300),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Colors.green,
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(7.r))),
-                        padding: EdgeInsets.symmetric(
-                            vertical: 6.w, horizontal: 12.w),
-                        child: Text("Accept",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w300)),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              const Divider(),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: double.infinity,
-                          width: 100.w,
-                          child: CacheImgCustom(
-                              url:
-                                  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAzHeZ9YsdC0EKMr_KlJN9Rt9JeuPOb1uU0g&s"),
-                        ),
-                        SizedBox(
-                          width: 10.w,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text("Prau Mountain",
-                                style: TextStyle(
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w500)),
-                            Text("5pax",
-                                style: TextStyle(
-                                    fontSize: 10.sp,
-                                    fontWeight: FontWeight.w300)),
-                            Text("200k",
-                                style: TextStyle(
-                                    fontSize: 12.sp,
-                                    fontWeight: FontWeight.w500))
-                          ],
-                        ),
-                      ],
+    return Obx(
+      () => controller.isLoading.value
+          ? const LoadingScreen()
+          : RefreshIndicator(
+              onRefresh: () async => controller.getAllBooked(),
+              child: Obx(
+                () => ListView.builder(
+                  itemCount: controller.bookeds.length,
+                  itemBuilder: (context, index) => GestureDetector(
+                    onTap: () {},
+                    child: BoxBookTour(
+                      bookTour: controller.bookeds[index],
+                      event: () => Get.toNamed(AppRoutes.userDetailBooked,
+                          arguments: controller.bookeds[index]),
                     ),
-                    Align(
-                      alignment: Alignment.bottomRight,
-                      child: SizedBox(
-                          height: 30.h,
-                          child: ElevatedButton(
-                              onPressed: () =>
-                                  Get.toNamed(AppRoutes.userDetailBooked),
-                              child: Text(
-                                "View",
-                                style: TextStyle(
-                                    fontSize: 9.sp,
-                                    fontWeight: FontWeight.w500),
-                              ))),
-                    )
-                  ],
+                  ),
                 ),
-              )
-            ],
-          ),
-        ),
-      ),
+              ),
+            ),
     );
   }
 }

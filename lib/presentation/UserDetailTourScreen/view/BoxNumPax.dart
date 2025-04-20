@@ -1,12 +1,12 @@
+import 'package:book_tour/model/TourModel.dart';
 import 'package:book_tour/presentation/UserDetailTourScreen/controller/ControllerUserDetailTour.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class BoxNumPax extends GetView<Controlleruserdetailtour> {
-  const BoxNumPax({
-    super.key,
-  });
+  final TourModel tourModel;
+  const BoxNumPax({super.key, required this.tourModel});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +30,10 @@ class BoxNumPax extends GetView<Controlleruserdetailtour> {
               ),
               Row(
                 children: [
-                  Text("80k",
+                  Text("${tourModel.price}\$",
                       style: TextStyle(
                           fontSize: 16.sp, fontWeight: FontWeight.w500)),
-                  SizedBox(
+                  const SizedBox(
                     width: 5,
                   ),
                   Text("/pax",

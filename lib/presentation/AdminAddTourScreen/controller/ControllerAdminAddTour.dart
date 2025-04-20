@@ -1,24 +1,43 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:book_tour/core/BaseWidget/DialogCustom.dart';
+import 'package:book_tour/core/Enum/EnumType.dart';
+import 'package:book_tour/core/util/izi_validate.dart';
+import 'package:book_tour/data/repository/RepositoryAdminAddTour.dart';
+import 'package:book_tour/model/ActivityScheduleModel.dart';
+import 'package:book_tour/model/AddressModel.dart';
 import 'package:book_tour/model/ProvinceVn.dart';
+import 'package:book_tour/model/TourModel.dart';
 import 'package:book_tour/presentation/AdminAddTourScreen/view/AdminAddTourScreen.dart';
 import 'package:book_tour/presentation/AdminAddTourScreen/view/BoxActivitySchedules.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
+import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 
 class Controlleradminaddtour extends GetxController {
+  Repositoryadminaddtour repositoryadminaddtour =
+      GetIt.I<Repositoryadminaddtour>();
+
   final Rx<File?> selectedImage1 = Rx<File?>(null);
   final Rx<File?> selectedImage2 = Rx<File?>(null);
   final Rx<File?> selectedImage3 = Rx<File?>(null);
+  final isLoading = false.obs;
   final activityTitleControllers = <TextEditingController>[].obs;
   final activityContentControllers = <TextEditingController>[].obs;
+  final nameController = TextEditingController();
+  final desciptionController = TextEditingController();
+  final priceController = TextEditingController();
+  final detailController = TextEditingController();
+
+  Enumtype? enumtype;
 
   final boxSchedules = <BoxActivitySchedule>[].obs;
 
-  final detailPlace = TextEditingController();
   final provinces = <ProvinceVn>[].obs;
   final districts = <Districts>[].obs;
   final towns = <Town>[].obs;
@@ -31,16 +50,94 @@ class Controlleradminaddtour extends GetxController {
     getProvinces();
   }
 
-  void clickCreate() {
-    print("sd");
-    activityTitleControllers.value.forEach((element) => print(element.text));
-    activityContentControllers.value.forEach((element) => print(element.text));
+  void clickAddTour(BuildContext context) async {
+    if (checkValidate(context)) {
+      isLoading.value = true;
+      var fileUpload = <String>[];
+      List<File> files = [
+        selectedImage1.value!,
+        selectedImage2.value!,
+        selectedImage3.value!
+      ];
+      await repositoryadminaddtour.uploadImg(
+        data: files,
+        success: (imageUrls) {
+          fileUpload = imageUrls;
+        },
+        error: (message) => Dialogcustom.show(context, "upload anh loi"),
+      );
+      if (fileUpload.isNotEmpty) {
+        final activityScheduleModels = <ActivityScheduleModel>[];
+        AddressModel addressModel = AddressModel(
+          detail: detailController.text,
+          town: town!.name,
+          district: district!.name,
+          province: province!.name,
+        );
+        for (int i = 0; i < activityTitleControllers.length; i++) {
+          String titel = activityTitleControllers[i].text;
+          String content = activityContentControllers[i].text;
+          activityScheduleModels
+              .add(ActivityScheduleModel(title: titel, description: content));
+        }
+
+        TourModel tour = TourModel(
+            imgs: fileUpload,
+            address: addressModel,
+            name: nameController.text,
+            description: desciptionController.text,
+            type: enumtype!.name,
+            activitySchedules: activityScheduleModels,
+            price: int.parse(priceController.text));
+        await repositoryadminaddtour.addTour(
+            data: tour,
+            success: () => Dialogcustom.show(context, "Create tour success"),
+            error: () => Dialogcustom.show(context, "Create tour success",
+                isSuccess: false));
+      }
+
+      isLoading.value = false;
+    }
+  }
+
+  bool checkValidate(BuildContext context) {
+    if (selectedImage1.value == null ||
+        selectedImage2.value == null ||
+        selectedImage3.value == null) {
+      Dialogcustom.show(context, "Vui lòng chọn ảnh", isSuccess: false);
+      return false;
+    }
+    if (IZIValidate.nullOrEmpty(nameController.value)) {
+      Dialogcustom.show(context, "Vui lòng nhập tên");
+      return false;
+    }
+    if (IZIValidate.nullOrEmpty(priceController.value)) {
+      Dialogcustom.show(context, "Vui lòng nhập giá");
+      return false;
+    }
+    if (IZIValidate.nullOrEmpty(desciptionController.value)) {
+      Dialogcustom.show(context, "Vui lòng nhập mô tả");
+      return false;
+    }
+    if (enumtype == null) {
+      Dialogcustom.show(context, "Vui lòng chọn type");
+      return false;
+    }
+    if (enumtype == null) {
+      Dialogcustom.show(context, "Vui lòng chọn type");
+      return false;
+    }
+    if (IZIValidate.nullOrEmpty(detailController.value)) {
+      Dialogcustom.show(context, "Vui lòng nhập địa chỉ cụ thể");
+      return false;
+    }
+    return true;
   }
 
   void addBoxSchedule() {
     final titleController = TextEditingController();
     final contentController = TextEditingController();
-    activityContentControllers.add(titleController);
+    activityTitleControllers.add(titleController);
     activityContentControllers.add(contentController);
     boxSchedules.add(BoxActivitySchedule(
       titleController: titleController,

@@ -7,7 +7,7 @@ class Dialogcustom {
       context: context,
       builder: (context) => AlertDialog(
         title: Text(
-          isSuccess ? "Thành công" : "Thất bại",
+          isSuccess ? "Success" : "Error",
           style: TextStyle(
               color: isSuccess ? Colors.green : Colors.red,
               fontWeight: FontWeight.w500),

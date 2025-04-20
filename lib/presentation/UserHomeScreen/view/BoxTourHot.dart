@@ -1,12 +1,12 @@
 import 'package:book_tour/core/BaseWidget/CacheImgCustom.dart';
+import 'package:book_tour/model/TourModel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BoxTourHot extends StatelessWidget {
-  const BoxTourHot({
-    super.key,
-  });
+  final TourModel tourModel;
+  const BoxTourHot({super.key, required this.tourModel});
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +24,9 @@ class BoxTourHot extends StatelessWidget {
             child: Stack(
               children: [
                 SizedBox(
+                  width: double.infinity,
                   height: double.infinity,
-                  child: CacheImgCustom(
-                      url:
-                          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdZPzvFTPTH-g_IeMTlo16ue1S3OdnmiCX7Q&s"),
+                  child: CacheImgCustom(url: tourModel.imgs!.first),
                 ),
                 Positioned(
                   top: 14,
@@ -39,7 +38,7 @@ class BoxTourHot extends StatelessWidget {
                         color: Colors.white,
                         borderRadius: BorderRadius.all(Radius.circular(8.r))),
                     child: Text(
-                      "Travel",
+                      tourModel.type!,
                       style: TextStyle(
                           fontSize: 11.sp, fontWeight: FontWeight.w600),
                     ),
@@ -57,7 +56,7 @@ class BoxTourHot extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Semeru Mountain",
+                      tourModel.name!,
                       style: TextStyle(
                           fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),
@@ -70,7 +69,7 @@ class BoxTourHot extends StatelessWidget {
                         const SizedBox(
                           width: 5,
                         ),
-                        const Text("Malang, East Java")
+                        Text(tourModel.address!.province!)
                       ],
                     )
                   ],
@@ -86,7 +85,7 @@ class BoxTourHot extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      "4.5",
+                      "${tourModel.averageRate}",
                       style: TextStyle(
                           fontSize: 14.sp, fontWeight: FontWeight.w400),
                     )
