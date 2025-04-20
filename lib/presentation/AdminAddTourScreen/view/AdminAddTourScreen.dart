@@ -138,21 +138,21 @@ class Adminaddtourscreen extends GetView<Controlleradminaddtour> {
                           controller.enumtype = value;
                         },
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
-                      Obx(
-                        () => CustomDropdown<ProvinceVn>(
-                          value: controller.province,
-                          items: controller.provinces.value,
-                          label: 'Province',
-                          itemLabelBuilder: (item) => item.name,
-                          onChanged: (newValue) {
-                            controller.province = newValue;
-                            controller.getDistricts();
-                          },
-                        ),
-                      ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      // Obx(
+                      //   () => CustomDropdown<ProvinceVn>(
+                      //     value: controller.province,
+                      //     items: controller.provinces.value,
+                      //     label: 'Province',
+                      //     itemLabelBuilder: (item) => item.name,
+                      //     onChanged: (newValue) {
+                      //       controller.province = newValue;
+                      //       controller.getDistricts();
+                      //     },
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 20.h,
                       ),

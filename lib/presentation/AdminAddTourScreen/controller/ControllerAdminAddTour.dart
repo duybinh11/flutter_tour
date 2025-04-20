@@ -47,7 +47,19 @@ class Controlleradminaddtour extends GetxController {
   void onInit() {
     super.onInit();
     addBoxSchedule();
-    getProvinces();
+    setDN();
+  }
+
+  void setDN() async {
+    String jsonString = await rootBundle.loadString(pathData);
+    Map<String, dynamic> mapData = jsonDecode(jsonString);
+    List<dynamic> listData = mapData['province'];
+
+    List<ProvinceVn> dt = listData.map((e) => ProvinceVn.fromMap(e)).toList();
+    province = dt.firstWhere(
+      (element) => element.id == "48",
+    );
+    getDistricts();
   }
 
   void clickAddTour(BuildContext context) async {
@@ -143,14 +155,6 @@ class Controlleradminaddtour extends GetxController {
       titleController: titleController,
       contentController: contentController,
     ));
-  }
-
-  void getProvinces() async {
-    String jsonString = await rootBundle.loadString(pathData);
-    Map<String, dynamic> mapData = jsonDecode(jsonString);
-    List<dynamic> listData = mapData['province'];
-    provinces.clear();
-    provinces.value = listData.map((e) => ProvinceVn.fromMap(e)).toList();
   }
 
   void getDistricts() async {
